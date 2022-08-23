@@ -1,40 +1,68 @@
 <template>
 <div>
-  <div>
-    <div>
+  <div class="header-all">
+    <div style="padding:10px">
       <img src="../../assets/ubook.svg" alt="ubook">
     </div>
-    <div>
-      <button class="Criar-contato ">
+    <div style="padding: 10px">
+      <button class="add-contact ">
         <i class="fa-solid fa-plus"></i>
          Criar Contato
         </button>
     </div>
-    <div class="">
-      <input class="input-text" type="text">
-      
+    <div class="search-input">
+      <input placeholder="Buscar..." class="input-text" type="text"  > 
+      <i class="fas fa-search"></i>
     </div>
   </div>
 </div>
 </template>
 
 <script>
-export default {
-name:'header'
 
+export default {
+    name: "header",
+    data() {
+        return {
+            openDialog: false
+        }
+    },
+    methods: {
+        addModal() {
+            return this.showModal = true;
+        },
+         closeModal () {
+        this.openDialog = false;
+      },
+    },
 }
 </script>
 
 <style>
+.search-input {
+  padding: 10px;
+  display: flex;
+  width: 70%;
+}
+.header-all {
+  justify-content: space-around;
+  display: flex;
+  width: 100%;
+  height: 100px;
+  align-items: center;
+}
 .input-text{
-  width: 64.5rem;
+  margin-left: 0px !important;
+  width: 100%;
   height: 2rem;
   margin: 0 0 0 1.5rem;
   padding: 0.438rem 0.5rem 0.375rem;
   border-radius: 4px;
   background-color: #e4e7f4;
 }
-.Criar-contato {
+.add-contact {
+  margin-left: 0px !important;
+  margin-right: 0px !important;
   font-weight: 500;
   width: 9rem;
   height: 2rem;
