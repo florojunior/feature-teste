@@ -9,6 +9,7 @@
 import Header from './pages/Header.vue';
 import List from './pages/List.vue';
 export default {
-    components: { Header, List }
+    components: { Header,
+                  List,}
 }
 </script>

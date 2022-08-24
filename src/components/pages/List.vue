@@ -15,10 +15,10 @@
         <td>(92) 992689899</td>
         <td>
           <div class="btn-list">
-          <button class="edit-btn">
+          <button @click="editItem()" class="edit-btn">
             <img src="../../assets/edit.svg" alt="">
           </button>
-               <button class="delete-btn">
+            <button  @click="deleteItem()" class="delete-btn">
             <img src="../../assets/delete.svg" alt="">
           </button>
         </div>
@@ -50,13 +50,58 @@
         <td>Italy</td>
       </tr>
     </table>
+    <AddModal v-if="openDialog" @closeModal="closeModal"/>
+    <EditModal @closeEdit="closeEdit" :dialogEdit="dialogEdit"/>
+    <DeleteModal @closeDelete="closeDelete" :dialogDelete="dialogDelete" />
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+import AddModal from '../modal/AddModal.vue'
+import EditModal from '../modal/EditModal.vue'
+import DeleteModal from '../modal/DeleteModal.vue';
 export default {
-name:'List'
-
+  name: "List",
+  components: { AddModal, EditModal, DeleteModal },
+  data() {
+    return {
+      openDialog: false,
+      dialogEdit: false,
+      dialogDelete: false
+    };
+  },
+  methods: {
+     ...mapActions('modal', [
+        'addContact'
+      ]),
+    closeModal() {
+      this.openDialog = false;
+    },
+     closeEdit() {
+      this.dialogEdit = false;
+    },
+    editItem () {
+      this.dialogEdit = true;
+    },
+    closeDelete() {
+      this.dialogDelete = false;
+    },
+    deleteItem(){
+      this.dialogDelete = true;
+    }
+    
+  },
+  created() {
+    this.unsubscribe = this.$store.subscribeAction((action) => {
+      if (action.type === 'modal/addContact') {
+        this.openDialog = true;
+      }
+    });
+  },
+  beforeDestroy() {
+    this.unsubscribe();
+  }
 }
 </script>
 

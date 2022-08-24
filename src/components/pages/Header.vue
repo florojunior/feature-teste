@@ -5,7 +5,7 @@
       <img src="../../assets/ubook.svg" alt="ubook">
     </div>
     <div style="padding: 10px">
-      <button class="add-contact ">
+      <button @click="addContact()" class="add-contact ">
         <i class="fa-solid fa-plus"></i>
          Criar Contato
       </button>
@@ -23,20 +23,21 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 
 export default {
     name: "header",
     data() {
         return {
-            openDialog: false
-        }
+            openDialog: false,
+        };
     },
     methods: {
-        addModal() {
-            return this.showModal = true;
-        },
-         closeModal () {
-        this.openDialog = false;
+      ...mapActions('modal', [
+        'addContact'
+      ]),
+      closeModal() {
+          this.openDialog = false;
       },
     },
 }
