@@ -8,12 +8,16 @@
       <button class="add-contact ">
         <i class="fa-solid fa-plus"></i>
          Criar Contato
-        </button>
+      </button>
     </div>
-    <div class="search-input">
+     <input class="search-input" id="busca" type="text" placeholder="Buscar..." />
+    <span id="box_icone_busca">
+        <i id="icone_busca" class="fa fa-search" onclick="sua_funcao_aqui()"></i>
+    </span>
+    <!--<div class="search-input">
       <input placeholder="Buscar..." class="input-text" type="text"  > 
       <i class="fas fa-search"></i>
-    </div>
+    </div>-->
   </div>
 </div>
 </template>
@@ -39,7 +43,24 @@ export default {
 </script>
 
 <style>
+#box_icone_busca{
+  width: 30px;
+  height: 30px;
+  padding: 10px;
+  position: relative;
+  left: -39px;
+  top: 1px;
+}
+#icone_busca {
+  margin-top: 5px;
+  color: #9297ac;
+  cursor: pointer;
+}
 .search-input {
+  background-color: #e4e7f4;
+  margin: 0 0 0 1.5rem;
+  padding: 0.438rem 0.5rem 0.375rem;
+  border-radius: 4px;
   padding: 10px;
   display: flex;
   width: 70%;
