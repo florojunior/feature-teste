@@ -6,7 +6,7 @@
         <th>E-mail</th>
         <th>Telefone</th>
       </tr>
-      <tr>
+      <tr class="loading-background">
         <td>
           <span class="tag-name">A</span>
           <span>Alface</span>
@@ -107,6 +107,9 @@ export default {
 
 
 <style>
+.loading-background {
+  background-color: #fff3f2;
+}
 .tag-name{
   border-radius: 15px;
   color: white;
