@@ -5,7 +5,7 @@
       style="width:100%"
       type="text"
       :value="value"
-      :placeholder="placeholder" @input="$emit('input',$event.target.value)"
+      @input="$emit('input',$event.target.value)"
     />
   </div>
   
@@ -23,10 +23,6 @@ export default{
 </script>
 
 <style scoped>
-
-::placeholder {
-  opacity:.4;
-}
 
 div{
  padding-left: 7px;

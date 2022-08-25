@@ -1,3 +1,5 @@
 export const getters = {
-  getList: (state)=> state.list
+  getList: (state)=> {
+    return state.list
+  }
 };

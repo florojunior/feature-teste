@@ -5,7 +5,7 @@
       <img src="../../assets/ubook.svg" alt="ubook">
     </div>
     <div style="padding: 10px">
-      <button @click="addContact()" class="add-contact ">
+      <button @click="addContact()" class="add-contact" v-if="showAddButton" >
         <i class="fa-solid fa-plus"></i>
          Criar Contato
       </button>
@@ -23,10 +23,10 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
-    name: "header",
+    name: "AppHeader",
     data() {
         return {
             openDialog: false,
@@ -40,6 +40,12 @@ export default {
           this.openDialog = false;
       },
     },
+    computed:{
+      ...mapGetters("contact", ['getList']),
+      showAddButton(){
+        return this.getList.length > 0
+      },
+    }
 }
 </script>
 

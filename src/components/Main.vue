@@ -1,7 +1,7 @@
 <template>
   <div>
-    <Header />
-    <List />
+    <app-header />
+    <app-list />
   </div>
 </template>
 
@@ -9,7 +9,9 @@
 import Header from './pages/Header.vue';
 import List from './pages/List.vue';
 export default {
-    components: { Header,
-                  List,}
+    components: { 
+      'app-header' : Header,
+      'app-list' :List
+    }
 }
 </script>

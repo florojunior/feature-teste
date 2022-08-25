@@ -8,7 +8,7 @@ const state = {
   list: []
 };
 
-export const modal = {
+export const contact = {
   namespaced,
   state,
   getters,

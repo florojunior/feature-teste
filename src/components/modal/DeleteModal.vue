@@ -16,7 +16,7 @@
           </div>
           <div class="modal-actions">
             <ButtomText :label="'Cancelar'" @closeModal="closeDelete()" :actionName="'closeModal'"/>
-            <ButtomRounded :label="'Salvar'"/>
+            <ButtomRounded :label="'Deletar'" @deleteObj="deleteObj()" :actionName="'deleteObj'"/>
           </div>
         </div>
       </div>
@@ -26,9 +26,9 @@
 </template>
 
 <script>
-import ButtomRounded from '../forms/ButtonRoudend.vue'
+import ButtomRounded from '../forms/ButtonRounded.vue'
 import ButtomText from '../forms/ButtonText.vue'
-
+import { mapActions } from 'vuex'
 export default {
   components:{
     ButtomRounded,
@@ -36,22 +36,16 @@ export default {
   },
   props:{
     dialogDelete: Boolean,
-  },
-  data:()=>({
-    nome: '',
-    email: '',
-    telefone: '',
-  }),
-  created() {
-    this.unsubscribe = this.$store.subscribeAction((action) => {
-      if (action.type === 'modal/addContact') {
-        this.visible = true;
-      }
-    });
+    id: Number
   },
   methods:{
+    ...mapActions("contact", ["deleteContactById"]),
     closeDelete(){
       this.$emit('closeDelete')
+    },
+    deleteObj(){
+      this.deleteContactById(this.id);
+      this.closeDelete();
     }
   },
   beforeDestroy() {

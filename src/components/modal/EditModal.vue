@@ -13,29 +13,17 @@
           
           <div class="modal-body">
             <Input
-              v-model="nome"
-              placeholder="Por favor digite seu nome"
+              v-model="obj.name"
               label="Nome"
-              icon="persone"
-              hint="Por favor digite seu nome"
-              color="#2196F3"
             />
             <Input
-              v-model="email"
-              placeholder="Por favor digite seu E-mail"
+              v-model="obj.email"
               label="Email"
-              icon="persone"
-              hint="Por favor digite seu nome"
-              color="#2196F3"
             />
             <Input
               id="text-input"
-              v-model="telefone"
-              placeholder="Por favor digite seu telefone"
+              v-model="obj.cellphone"
               label="Telefone"
-              icon="persone"
-              hint="Por favor digite seu nome"
-              color="#2196F3"
             />
           </div>
           <div class="modal-actions">
@@ -52,8 +40,9 @@
 <script>
 
 import Input from '../forms/Input.vue'
-import ButtomRounded from '../forms/ButtonRoudend.vue'
+import ButtomRounded from '../forms/ButtonRounded.vue'
 import ButtomText from '../forms/ButtonText.vue'
+import { mapActions } from 'vuex'
 
 export default {
   components:{
@@ -63,22 +52,31 @@ export default {
   },
   props:{
     dialogEdit: Boolean,
+    id: Number
   },
   data:()=>({
-    nome: '',
-    email: '',
-    telefone: '',
+    obj:{
+      name: '',
+      email: '',
+      cellphone: '',
+    } 
   }),
-  created() {
+  async mounted() {
     this.unsubscribe = this.$store.subscribeAction((action) => {
-      if (action.type === 'modal/addContact') {
+      if (action.type === 'modal/editContact') {
         this.visible = true;
       }
     });
   },
   methods:{
+    ...mapActions("contact", ["getContactById"]),
     closeEdit(){
       this.$emit('closeEdit')
+    }
+  },
+  watch:{
+    async dialogEdit(){
+       this.obj =  await this.getContactById(this.id);
     }
   },
   beforeDestroy() {
