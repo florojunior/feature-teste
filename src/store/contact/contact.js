@@ -5,7 +5,8 @@ import { mutations } from './mutations';
 const namespaced = true;
 
 const state = {
-  list: []
+  list: [],
+  filterInput: ""
 };
 
 export const contact = {

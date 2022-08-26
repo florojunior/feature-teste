@@ -11,11 +11,24 @@ export const actions = {
     state.commit('SET_LIST', listStorage);
   },
 
+  updateContact(state, payload) {
+    let listStorage = JSON.parse(localStorage.getItem("list"));
+    const indexObj = listStorage.findIndex((contact) => contact.id === payload.id);
+    listStorage[indexObj] = Object.assign({}, payload);
+    localStorage.setItem("list", JSON.stringify(listStorage));
+    state.commit('SET_LIST', listStorage);
+  },
+
   initStateValuesFromLocalStorage(state){
     const listFromLS = localStorage.getItem("list")
     if(listFromLS){
       state.commit('SET_LIST', JSON.parse(listFromLS));
     }
+  },
+
+  setInputFilter(state, payload) {
+    console.log(payload);
+    state.commit('SET_FILTER_INPUT', payload);
   },
 
   async getContactById(state, id){

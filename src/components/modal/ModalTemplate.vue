@@ -1,60 +1,39 @@
 <template>
-<div v-if="dialogDelete">
-  <transition  name="modal">
+  <transition name="modal">
     <div class="modal-mask">
       <div class="modal-wrapper">
         
         <div class="modal-container">
           <div class="modal-header">
             <h3>
-              Excluir Contato
+              <slot name="title"/>
             </h3>
           </div>
-          
+          <div>
+           
+          </div>
           <div class="modal-body">
-            Deseja realmente excluir o contato?
+            <slot name="body"/>
           </div>
           <div class="modal-actions">
-            <ButtomText :label="'Cancelar'" @closeModal="closeDelete()" :actionName="'closeModal'"/>
-            <ButtomRounded :label="'Deletar'" @deleteObj="deleteObj()" :actionName="'deleteObj'"/>
+            <slot name="actions"/>
           </div>
         </div>
       </div>
     </div>
   </transition>
-  </div>
 </template>
 
 <script>
-import ButtomRounded from '../forms/ButtonRounded.vue'
-import ButtomText from '../forms/ButtonText.vue'
-import { mapActions } from 'vuex'
 export default {
-  components:{
-    ButtomRounded,
-    ButtomText,
-  },
-  props:{
-    dialogDelete: Boolean,
-    id: Number
-  },
-  methods:{
-    ...mapActions("contact", ["deleteContactById"]),
-    closeDelete(){
-      this.$emit('closeDelete')
-    },
-    deleteObj(){
-      this.deleteContactById(this.id);
-      this.closeDelete();
-    }
-  },
-  beforeDestroy() {
-    this.unsubscribe();
-  },
+
 }
 </script>
 
-<style scoped>
+<style>
+  #text-input {
+    width: 8rem !important;
+  }
   .modal-mask {
     position: fixed;
     z-index: 9998;
@@ -80,7 +59,7 @@ export default {
 
   .modal-container {
     width: 27rem;
-    height:  12.938rem;
+    height: 21.375rem;
     margin: 0px auto;
     background-color: #fff;
     border-radius: 16px;
@@ -118,13 +97,7 @@ export default {
     align-items: center;
     display: flex;
   }
-
-  .modal-body {
-    display: flex;
-    width: 100%;
-    margin-left: 3rem;
-  }
-
+  
   .modal-actions{
     border-top: solid 1px #c0c3d2;
     height: 4rem;

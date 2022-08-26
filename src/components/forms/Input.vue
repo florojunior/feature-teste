@@ -32,8 +32,7 @@ div{
 label {
   width: calc(2.375rem - 50px);
   height: 1rem;
-  margin: 1.219rem 13.125rem 0.25rem 1.5rem;
-  font-family: Roboto;
+  margin-left: 18px;
   font-size: 0.875rem;
   font-weight: normal;
   font-stretch: normal;
